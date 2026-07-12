@@ -2,89 +2,89 @@
 
 ## Objective
 
-I wanted to build an active directory lab in order to gain expience in a real world environment with many clients. 
+Built a Windows Server 2022 Active Directory environment to simulate a small enterprise network. Configured a Domain Controller, DNS, DHCP, and RRAS/NAT services, then deployed a Windows 10 client joined to the domain. Automated the creation of over 1,000 Active Directory user accounts using PowerShell.
 
 ### Skills Learned
 
-- how to set up an active directory server
-- networking
-- 
+- Active Directory Domain Services (AD DS)
+- Windows Server Administration
+- Active Directory Users and Computers (ADUC)
+- DHCP Configuration
+- DNS Configuration
+- RRAS / NAT
+- Domain Management
+- PowerShell Automation
+- Virtual Machine Administration
+- Windows 10 Domain Join
+- Network Troubleshooting
 
 ### Tools Used
 
+- Windows Server 2022
+- Windows 10 Pro
 - VirtualBox
+- PowerShell
+- Active Directory
+- DHCP
+- DNS
+- RRAS
+- GitHub
   
 ## Steps
 
-Don't install guest additions until windows installed fully- will mess up boot
+1. Created Virtual Machines
+Installed Windows Server 2022
+Installed Windows 10 Pro
+Configured networking in VirtualBox
+NAT Adapter for Internet connectivity
+Internal Network adapter for private domain communication
 
-Use desktop experience version
+2. Configured Domain Controller
+Renamed server to DC
+Assigned static IP address
 
-Admin- Password1
+IP Address:
+172.16.0.1
+Subnet Mask:
+255.255.255.0
+DNS:
+127.0.0.1
 
-Allow connection to other devices 
+<img width="585" height="142" alt="image" src="https://github.com/user-attachments/assets/411807a1-7a4b-4fea-9c2a-f63ec49caef8" />
 
-Devices- insert guest additions cd
+3. Installed Active Directory
+Installed:
+Active Directory Domain Services (AD DS)
+Promoted the server to a Domain Controller, naming the forest "mydomain.com"
 
-Go to files- find guest additions amd64 
-Then install that then shutdown 
+4. Configured RRAS
+Installed:
+Remote Access Routing
+Configured:
+NAT
+Internet sharing for internal clients
+Result:
+Windows 10 clients on the internal network gained Internet access while remaining joined to the private domain.
 
-Rename networks based on ip addresses 
-10…. Is the home router connection
-The automatic one is the internal
+5.Configured DHCP
+Installed DHCP Server role.
+Created an IPv4 scope.
 
-Change name of pc to DC by right clicking windows button -system then restart 
+<img width="591" height="387" alt="image" src="https://github.com/user-attachments/assets/7237f154-1b35-4cfa-bdaf-450ca1bca2df" />
 
-Change ip address (172.16.0.1)+ subnet mask(255.255.255.0+ no default gateway + dns for internal connection (127.0.0.1)
+Gateway:
+172.16.0.1
+Authorized DHCP within Active Directory.
 
-Add roles and features through server manager 
-Click next> next> select server> choose active directory domain services> add features> next until install 
-Then click flag to promote to domain > add new forest> mydomain.com > same password > uncheck dns delegation > next until install (will restart) 
+Added Windows 10 Client
+Configured:
+Internal Network Adapter
+Joined the client computer to:
 
-Windows button> admin> users and computers 
-Create new organizational unit by right clicking mydomain.com called _admins
-Then add new user to that -my name
-Make myself member of “domain admins”for object name then ok until it is underlined then okay >apply
+<img width="411" height="426" alt="image" src="https://github.com/user-attachments/assets/d0efca03-0854-40b4-a807-06c988aae461" />
 
-Sign out 
-Then login into other admin user> a-cblunt + password 
+Automated User Creation
+Downloaded a PowerShell script containing sample user data from IT profesional, Josh Madaokor's github.
+Executed the script using PowerShell ISE as Administrator.
 
-RAS/NAT for network connection for windows client
-
-Roles and features again then check remote acces for roles> next until routing check  > then next until install 
-
-Then go to tools > routing and remote access> DC(local) right click configure and enable > then next until choose NAT for external client connection through 1 IP 
-Using 2022 version may be issue with RAS/NAT
-
-Add tools- dhcp>tools > DHCP create new scope for ipv4
-Name 172.16.0.100-200
-Start …100
-end  …200
-length - 24
-subnetmask - 255.255.255.0
-Want to configure DHCP option 
-Ip address which has nat configured 
-
-Make sure server is up and running when opening client windows machine 
-Chance pc name(advanced) to client1 and domain to mydomain.com 
-
-Make sure client ip addresses are set to automatic 
-
-Download zip file from joshmadakor AD_PS github 
-
-Extract then open windows powershell ISE as admin
-Open script 1_Create_users.ps1
-Need to Set-ExecutionPolicy Unrestricted 
-Then yes to all 
-Then cd to  names.txt location 
-
-When client gets address will shows in servers dhcp address leases
-
-Since in domain any client can login 
-
-Example below
-
-<img width="596" height="400" alt="Screenshot 2025-12-22 163016" src="https://github.com/user-attachments/assets/a5b856c0-4063-4c39-858c-623c8fff7fcc" />
-
-
-*Ref 1: vulnerability scan*
+<img width="612" height="426" alt="image" src="https://github.com/user-attachments/assets/5b770bc5-aecc-43cb-8a5d-512d1b82de26" />
