@@ -1,4 +1,4 @@
-# AD-lab
+# AD-lab (joining to a server)
 
 ## Objective
 
