@@ -1,4 +1,4 @@
-# AD-lab (joining to a server)
+# AD-lab (setting up environment)
 
 ## Objective
 
